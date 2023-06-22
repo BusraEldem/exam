@@ -1,0 +1,468 @@
+---
+title: "Studying the Effects of Indoor Activity on Prey Acquisition and Age Distribution in Cats: Recommendations for Municipal Policies"
+author: 
+  -Büşra Eldem
+bibliography: ../bibliography/biblio.bib
+csl: ../csl/apa.csl
+header-includes:
+  - \usepackage{polyglossia}
+  - \setmainlanguage{english}
+  - \usepackage{booktabs}
+  - \usepackage{caption} 
+  - \captionsetup[table]{skip=10pt}
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
+    fig_height: 3
+    fig_width: 4
+    keep_tex: no
+    latex_engine: xelatex
+    number_sections: yes
+    toc: no
+geometry: margin=1in
+link-citations: yes
+urlcolor: blue
+fontsize: 12pt
+biblio-style: apalike
+abstract: |
+    Domestic cats (Felis catus) are one of the most finable species on earth as both stray and house cats. After the establishment of modern cities, these animals become a part of our daily life. Thus, this creates a huge number of rambling cats in the streets and causes a problem for municipalities in terms of protecting them and providing a sustainable city life for both animals and city-dwellers. Hereby, the data was collected from 78 volunteered owners’ cats from 6 different countries, The main hypothesis for this research is to find a positive correlation between the number of indoor hours of activity time and the number of prey per month and a negative correlation between the number of indoor hours of activity time and age by using simple linear regression for each of them with indoor hours as dependent, age and number of prey per month as independent variables.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+<!-- ======================================================================= -->
+
+<!-- ============================== FOOTNOTES ============================== -->
+
+<!-- ======================================================================= -->
+
+# Introduction
+
+  Domestic cats (Felis catus) are one of the most abundant carnivores on earth, with up to 600 million pet cats globally. The total number of domestic cats is almost certainly greater than the collective number of individuals of all other felid species combined (Kikillus et al., 2017; Marra and Santella, 2016; Kays, et al.,2019). The Felis Catus mostly known as stray cats build a distinctive proportion of stray animals in general. Like all mammals, stray cats have their home range size which can be described as a defined area where an animal travels and search for food in their life span. Other studies show that there are some remarkable correlations between home range size and sex or climate etc. In this respect, in light of these studies, this research will be focused on a coherent correlation between indoor hours activity, prey per month, ages of cats, and the home range size in respect of municipality policies towards stray animals most focused on stray cats (Felis catus).
+
+The management of cats is complicated, in part, because the same species can be found living as a pet, as a free-ranging feral animal consuming only wild prey, or semi-wild in a colony with supplemental food and potentially very high local cat densities (Kays & DeWan, 2004; Crowley et al., 2019; Kays, et al.,2019).  Consequently, in the original research data was collected via “created a “Cat Tracker” as four regions and recruit volunteers to track their pet cats” by GPS (Kays, et al.,2019). The dataset that will be used during the research, shows the tag, animal name, animal taxon, deploy-on date, deploy-off date, hunt, prey per month, animal reproductive condition, animal sex, indoor hours, number of cats in the house, food dry, food wet, food other, study site, age years. Therefore, this dataset which is found via “tidytuesday” will be used throughout this research to answer the question of whether there is a significant relationship between the home range size of a cat and its, prey per month, age, and indoor hours via using simple linear regression and correlation and how one can use this to make better policies about stray cats (Felis catus) -as both species that used in the dataset and this research is Felis catus-and to be able to take under control of their population with a humane approach for to create a peaceful environment for both humans and animals. 
+ 
+
+## Literature Review
+
+ Animals and humans have lived together from the most underdeveloped city forms until today’s latest developed city forms. As we developed cities that we have been living in as humans, the main factors that have been living in cities also need to be considered. Thus, stray animals are one of the larger elements that formed both the past and today’s world. Therefore, the management of stray animals holds remarkable importance in municipality management as municipalities are the most important component of the governance system. Hence modern cities are mostly centered around and designed for humans in the anthropocentric approach other factors that created cities seemed as unimportant and mostly should exist as long as they served human beings (Callicott, 1984; Tandoğan,2022). Therefore, stray animals, relationships with them in city life basis, and managing to control them peacefully come into sight as a factor of daily life in cities.
+ 
+One of the most important components that create cities and city life is stray animals, and one of its big elements is stray cats. Seven thousand years ago, The European and African wild cat (Felis silvestris) was domesticated in the Fertile Crescent region of the Middle East and Africa. Cats were used to reduce the number of rats and mice that resided around settlements. Over time, the process of domestication changed the wild cat into a separate species called the domestic or house cat (Felis catus) (Hildreth, et al.,2021) and mostly known as stray cats. Animals in these populations are generally termed ‘feral’, meaning that they are descended from domesticated ancestors but now exist in a free-living state with no direct dependence on humans (Doherty, et al.,2015). 
+
+The behavioristic trait manifested by a display of property ownership-a defense of certain positions or things-reaches its highest development in the human species. Man considers it his inherent right to own property either as an individual or as a member of a society or both. Further, he is ever ready to protect that property against aggressors, even to the extent at times of sacrificing his own life if necessary. That this behavioristic pattern is not peculiar to man, but is a fundamental characteristic of animals in general, has been shown for diverse animal groups (Burt, 1943). Thus, the concept of the home range has come into sight as all animals have their specific territory. The home range then is the area, usually around a home site, over which the animal normally travels in search of food. The territory is the protected part of the home range, be it the entire home range or only the nest. Every kind of mammal may be said to have a home range, stationary or shifting. Only those that protect some part of the home range, by fighting or aggressive gestures, from others of their kind, during some phase of their lives, may be said to have territories (Burt, 1943). Thus, home range describes the relative amount of time that an animal spends in any place and can be defined as the smallest sub-region which accounts for a specified proportion, of its total utilization (Jennrich and Turner 1969:232; Seaman, Powell, 1996). Herby, stated that there is a negative correlation between the age of the cat and the movement of the cat so also with its home range size of it (Hall et al., 2016; Castaneda et al., 2019; Kays, et al.,2019) also female cats most tend to meet their food requirements within smaller home ranges (McLoughlin & Ferguson, 2000; Bengsen, et al., 2015) In addition to that many researchers show that with the increase of indoor hours activity the home-range size of a cat decrease and although cats kill fewer prey than the other wild predators, the increase of the amount of the prey per month has a positive correlation with the size of home-range.  In a polygynous mating system, adult males are expected to structure their space use to maximize mating opportunities with multiple females (Sandell, 1989; Bengsen, et al., 2015). Average adult male home range sizes should, therefore, be greater than female home range sizes (Liberg et al., 2000; Powell, 2000; Bengsen, et al., 2015) and greater than required for metabolic requirements alone (Sandell, 1989; Bengsen, et al., 2015). Hence, the average adult male home range size should relate indirectly to landscape productivity through its effect on female home range size. (Bengsen, et al., 2015). Thus, it is shown that there are both negative and positive relationships between home range size and other factors. 
+
+To sum up, feral cats or stray cats are a remarkable part of the daily life of city dwellers.  Humans and animals have been living in the same area from ancient civilizations till today’s modernist cities. Hence modern cities and city life are built around an anthropocentric view that claims that everything is worthless unless it serves humans and humans’ benefit. Society must subtract stray animals from this “everything” concept as all animals are as valuable as humans. Thus, the management of their population and how to control that holds importance for better governance of municipalities. In light of previous research, a correlation will be searched between the ages, prey per month numbers and indoor hours of cats, and pre-accepted home-range size to suggest efficient and humane policies toward stray cats.
+
+
+# Data Analyzes
+
+The dataset composes of 78 cats who are house cats that voluntarily unleashed by their owners to examine the home-range size and how it differs according to specified variables via GPS in six countries. As it was stated in the research the average home-range home range was. (Kays, et al.,2019. The dataset used in this paper is taken from “tidytuesday” which is originally published under the name “The small home ranges and large local ecological impacts of pet cats” in an article by Animal Conservation Magazine. The variables are represented by cats’ names and the observations are represented by indoor hours, and prey per month. Indoor hours are measured in a given month and the ages of the cats are 1< registered as 0.
+
+```{r results='asis', fig.align='center', results='hide', echo=FALSE, fig.cap='Number of Prey per Months and Ages of Cats According to Indoor Hours'}
+
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(dplyr)
+library(ggthemes)
+library(readr)
+cats_uk <- read_csv("C:/Users/mirsa/Desktop/Make-up Exam/data/cats_uk.csv")
+View(cats_uk)
+ggplot(data = cats_uk, aes(x = prey_p_month, y = age_years, color = factor(hrs_indoors))) +
+  geom_line(size = 1, alpha = 0.7) +
+  facet_wrap(~ hrs_indoors, scales = "free") +
+  labs(title = "Number of Prey per Month and Ages of Cats\nGrouped by Indoor Hours",
+       x = "Prey per Month",
+       y = "Age",
+       color = "Indoor Hour") +
+  scale_color_discrete(guide = guide_legend(title = "Indoor Hour")) +
+  theme_minimal()
+
+
+```
+
+Table shows the ages of the cats and the prey per month grouped under indoor hours. 
+
+
+```{r, echo=FALSE}
+library(xtable) 
+library(summarytools)
+st_options(lang = "en")
+```
+
+```{r results='asis', echo=FALSE, warning=FALSE, message=FALSE}
+cats_uk %>%
+  select("prey_p_month", "hrs_indoors", "age_years" ) %>% 
+  descr(stats = c("mean", "sd", "min", "med", "max"), transpose = TRUE) %>% 
+  xtable(caption = "Summary Statistics",
+         label = "tab:summary",
+         align = c("l", "c", "c", "c", "c", "c")) %>% 
+  print(booktabs = TRUE, comment = FALSE, caption.placement = "top")
+```
+
+# Methodology
+
+,The data groups will be checked if the covariation is linear and followed a normal distribution via Pearson’s Correlation Test. Thirdly Spearman coefficient will be used to analyze correlations between two groups which is suitable for non-linear datasets. Afterward, simple linear regression which is suitable for non-normal regression analysis will be used for each group which was first, indoor hours activity and ages; second, indoor hours activity and prey per month will be done.
+
+
+##Findings
+
+#Pearson's Correlation
+Pearson’s Correlation (r) is one of the most common ways to check if there is a significant correlation between variables. It is a numerical range between -1 to 1. If the r-value is closer to 1 there is a positive correlation between variables if it is closer to -1 then, there is a negative correlation between variables and if it is equal to zero then it means there is no significant correlation between variables. 
+
+```{r  results='asis', echo=FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+
+library(correlation)
+library(ggplot2)
+library(readr)
+library(tidyr)
+library(knitr)
+
+x <- cats_uk$hrs_indoors
+y <- cats_uk$prey_p_month
+cor_coef1 <- cor(x, y, use = "pairwise.complete.obs")
+
+x <- cats_uk$hrs_indoors
+y <- cats_uk$age_years
+cor_coef2 <- cor(x, y, use = "pairwise.complete.obs")
+
+correlation_matrix <- cor(cats_uk[, c("hrs_indoors", "prey_p_month", "age_years")], use = "pairwise.complete.obs")
+
+correlation_df <- as.data.frame(correlation_matrix)
+correlation_df$variable1 <- row.names(correlation_df)
+
+correlation_long <- tidyr::pivot_longer(correlation_df, cols = -variable1, names_to = "variable2", values_to = "correlation")
+
+kable(correlation_long, caption = "Correlation Matrix", format = "markdown")
+
+```
+shows the correlation graph.
+
+
+```{r correlation_matrix, name="correlation_matrix", echo=FALSE, warning=FALSE, message=FALSE}
+
+library(readr)
+library(Matrix)
+library(corrplot)
+
+var1 <- c(cats_uk$hrs_indoors)
+var2 <- c(cats_uk$prey_p_month)
+var3 <- c(cats_uk$age_years)
+df <- data.frame(var1, var2, var3)
+cor_matrix <- cor(df, use = "pairwise.complete.obs")
+corrplot(cor_matrix, method = "number", col = colorRampPalette(c("darkblue", "blue", "lightblue"))(10))
+```
+
+```{r correlation_tests, name="correlation_tests", echo=FALSE}
+
+independent <- c(cats_uk$hrs_indoors)
+dependent1 <- c(cats_uk$prey_p_month)
+dependent2 <- c(cats_uk$age_years)
+result1 <- cor.test(independent, dependent1)
+result2 <- cor.test(independent, dependent2)
+coefficient1 <- result1$estimate
+coefficient2 <- result2$estimate
+p_value1 <- result1$p.value
+p_value2 <- result2$p.value
+table_result <- data.frame(
+  Variables = c("Independent - Dependent1", "Independent - Dependent2"),
+  Correlation_Coefficient = c(result1$estimate, result2$estimate),
+  P_Value = c(result1$p.value, result2$p.value)
+)
+
+```
+For this research, the r-value between indoor hours and prey per month is -0.371 which indicates a moderately negative relationship. Furthermore, the r-value between indoor hours and ages of cats is 0.183 which indicates a significantly low correlation. Thus, another correlation analysis test, Spearman’s coefficient which is different from Pearson’s correlation test in a way of being non-parametric was also done.
+
+
+#Spearman's Correlation
+
+The Spearman’s coefficient (p) test is a non-parametric test that measures the relationship between variables. As in Pearson’s correlation test, this test also has a numerical range between -1 to 1 to determine the relationship. Closer to -1 indicates a negative relationship and closer to 1 indicates a positive relationship between variables
+
+
+
+
+
+#Between Indoor Hours and Prey per Month
+
+```{r, results='asis', echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, results='hide'}
+library(readr)
+library(reshape2)
+library(ggplot2)
+invisible({
+cor.test(cats_uk$hrs_indoors, cats_uk$prey_p_month, method = "spearman", exact = FALSE)
+var1 <- c(cats_uk$hrs_indoors)
+var2 <- c(cats_uk$prey_p_month)
+correlation_matrix <- cor(data.frame(var1, var2), method = "spearman")
+print(correlation_matrix)
+correlation_df <- melt(correlation_matrix)
+})
+
+variable1 <- "hrs_indoors"
+variable2 <- "prey_p_month"
+```
+
+
+```{r, results='asis', echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+library(readr)
+library(reshape2)
+library(ggplot2)
+  ggplot(data = correlation_df, aes(x = Var1, y = Var2, fill = value)) +
+    geom_tile(color = "white") +
+    scale_fill_gradient(low = "darkgreen", high = "lightgreen", limits = c(-1, 1)) +
+    labs(title = "Spearman's Correlation Matrix for Indoor Hours and Prey per Month",
+         x = "Variable 1",
+         y = "Variable 2") +
+    theme_minimal()
+
+
+
+```
+
+
+Variable one represents the indoor hours and variable two represents the prey per month.
+
+
+
+#Between Indoor Hours and Ages of Cats
+
+
+```{r, results='asis', echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, results='hide'} 
+library(readr)
+library(Matrix)
+library(correlation)
+library(ggplot2)
+library(reshape2)
+
+invisible({
+cor.test(cats_uk$hrs_indoors, cats_uk$prey_p_month, method = "spearman", exact = FALSE)
+var1 <- c(cats_uk$hrs_indoors)
+var2 <- c(cats_uk$age_years)
+correlation_matrix <- cor(data.frame(var1, var2), method = "spearman")
+print(correlation_matrix)
+correlation_df <- melt(correlation_matrix)
+})
+
+variable1 <- "hrs_indoors"
+variable2 <- "age_years"
+
+```
+
+
+```{r, results='asis', echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE} 
+library(readr)
+library(Matrix)
+library(correlation)
+library(ggplot2)
+library(reshape2)
+ggplot(data = correlation_df, aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient(low = "darkgreen", high = "lightgreen", limits = c(-1, 1)) +
+  labs(title = "Spearman's Correlation Matrix for Indoor Hours and Ages of Cats",
+       x = "Variable 1",
+       y = "Variable 2") +
+  theme_minimal()
+
+```
+ 
+ 
+ Variable one represents the indoor hours and variable two represents the ages of the cats.
+ 
+ 
+ As it was observed in this research, the p-value of the indoor hours and prey per month was 0.001615 and the null hypothesis for this value is a zero correlation between variables and was rejected because there is a negative relationship between variables. The negative correlation coefficient which is -0.350, indicates an inverse relationship between the variables which means as the number of hours spent indoors in a month by cats increases, the number of prey caught per month tends to decrease. Furthermore, the p-value of the indoor hours and ages of cats was observed as 0.045 which is less than the significance level of 0.05 thus the null hypothesis that assumes the correlation between the variables is zero can be rejected. Therefore, it can be said that there is a positive relationship between variables which means as the ages of the cat increase, the amount of time spent indoors tends to increase proportionally.
+
+
+
+#Shapiro-Wilk Test
+
+The Shapiro-Wilk (w) test is a statistical test to determine if a data set is normally distributed or not. This test was applied for both dependent and two independent variables that have been used within this research.
+
+```{r, echo = FALSE, results='hide'}
+
+
+library(readr)
+shapiro.test(cats_uk$hrs_indoors)
+shapiro.test(cats_uk$prey_p_month)
+shapiro.test(cats_uk$age_years)
+```
+
+
+```{r, results='asis', echo=FALSE, message=FALSE, warning=FALSE, cache = FALSE}
+library(kableExtra)
+
+var1 <- c(cats_uk$hrs_indoors)
+var2 <- c(cats_uk$prey_p_month)
+var3 <- c(cats_uk$age_years)
+
+table_result <- data.frame(
+  Variable = c("hrs_indoors", "prey_p_month", "age_years"),
+  Test_Statistic = c(shapiro.test(var1)$statistic,
+                     shapiro.test(var2)$statistic,
+                     shapiro.test(var3)$statistic),
+  P_Value = c(shapiro.test(var1)$p.value,
+              shapiro.test(var2)$p.value,
+              shapiro.test(var3)$p.value)
+)
+
+min_p <- min(table_result$P_Value)
+max_p <- max(table_result$P_Value)
+
+kable(table_result, caption = "Shapiro-Wilk Test Results", align = "c") %>%
+  kable_styling(bootstrap_options = "striped", full_width = FALSE)
+
+
+
+```
+
+
+```{r import-data-join5, echo=FALSE, message=FALSE, warning=FALSE, cache = FALSE}
+library(stats)
+library(readr)
+library(ggplot2)
+
+# Create the table_result object
+table_result <- data.frame(
+  Variable = c("Variable1", "Variable2", "Variable3"),
+  P_Value = c(0.05, 0.02, 0.1)
+)
+
+# Calculate the minimum and maximum p-values for setting the ylim in the plot
+min_p <- min(table_result$P_Value)
+max_p <- max(table_result$P_Value)
+
+# Plot the results
+ggplot(table_result, aes(x = Variable, y = P_Value)) +
+  geom_point(stat = "identity", fill = "steelblue") +
+  labs(title = "Shapiro-Wilk Test Results",
+       x = "Variable",
+       y = "p-value") +
+  ylim(min_p, max_p) +
+  theme_minimal()
+
+
+```
+
+
+Variable one represents indoor hours, variable 2 represents prey per month and variable 3 represents ages of the cats.Firstly, it was applied to indoor hour data and the w-value was measured at 0.907 with a p-value of 3.151e-05 and less than the significance value of 0.05. Thus, the null hypothesis was rejected and the distribution of indoor hours does not have a normal distribution. Secondly, the w-value of the ages of the cats was measured at 0.927 with a p-value of 0.0002502 and again less than 0.05 so the null hypothesis was rejected and the distribution of cats’ ages does not have a normal distribution. Lastly, the w-value of prey per month was measured at 0.702 with a p-value of 2.7e-11 which is less than 0.05 and the distribution of prey per month also does not have normal distribution.
+
+#Simple Linear Regression for Indoor Hours and Prey per Month and Indoor Hours and Ages of Cats
+
+Simple linear regression is a statistical test that aims to model the relationship between one dependent and one independent variable. Thus, for this research, two dependent variables were combined and to create a graph with one independent variable. 
+
+```{r import-data-join6, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(readr)
+library(ggplot2)
+library(dplyr)
+
+# Scatterplot for prey per month and ages of cats
+independent <- cats_uk$hrs_indoors
+dependent1 <- cats_uk$prey_p_month
+dependent2 <- cats_uk$age_years
+
+df <- data.frame(independent, dependent1, dependent2)
+
+ggplot(df, aes(x = independent)) +
+  geom_point(aes(y = dependent1), color = "lightgreen") +
+  geom_smooth(aes(y = dependent1), method = "lm", se = FALSE, color = "lightgreen") +
+  geom_point(aes(y = dependent2), color = "darkgreen") +
+  geom_smooth(aes(y = dependent2), method = "lm", se = FALSE, color = "darkgreen") +
+  labs(x = "Independent Variable", y = "Dependent Variables") +
+  theme_minimal()
+```
+
+ Dependent variables represents the prey per month and ages of the cats and independent variables represents the indoor hours. Graphs show that one cannot completely say that there is a significant linear relation ship between variables.
+
+
+
+model: $$
+Y_1t = \beta_01 + \beta_1 X +  \varepsilon_1
+$$ where $Y_1t$ is  first dependent variable $\beta_0$,is intercept coefficient $\beta_1$ coefficient for the independent variable  are the regression coefficients and $\varepsilon_1$ are the error terms. And for the second equation 
+
+model: $$
+Y_2t = \beta_02 + \beta_2 X + \varepsilon_2
+$$ where $Y_2t$ is  first dependent variable $\beta_02$,is intercept coefficient $\beta_1$ coefficient for the independent variable  are the regression coefficients and $\varepsilon_2$ are the error terms.
+
+model: $$
+PreyperMonth(y1t) = \beta_01 + \beta_1 X + \varepsilon_1
+$$ Where $y1t = prey per month$ is a dependent variable and $beta_1 X = indoor hours$ indoor hours independent variables. Second equation is
+model: $$
+Ages of Cats (y2t) = \beta_02 + \beta_2 X + \varepsilon_2
+$$  Where $y2t = ages of cats$  is a dependent variable and $beta_1 X = indoor hours$ indoor hours independent variables.
+
+
+
+
+
+
+$\beta_1$ and $\beta_2$ are: $$
+H_0: \beta_1 = 0 \quad
+H_A: \beta_1 \neq 0
+$$ $$ 
+H_0: \beta_2 = 0 \quad
+H_A: \beta_2 \neq 0
+$$ $$
+$$
+The first of them was between the independent variable which was indoor hours and the dependent variable which was prey per month. Based on the analysis a significant yet relatively weak relationship was observed between independent and dependent variables. The p-value of these two variables is 0.00186 which suggests that the relationship is unlikely to be randomly occurred. In addition to that the intercept is 8.40 and the coefficient for the independent variable is -0.360 which means a change in the dependent variable for a unit change in the independent variable. The t-value and p-value for the independent variable indicate that the relationship between the variables is statistically significant yet the relationship overall is relatively weak. So the null hypothesis was rejected
+
+Furthermore, the other analysis was made between indoor hours which was an independent variable, and the ages of cats’ which was the dependent variable. The p-value for the intercept was measured as 4.77e-05 and for the indecent variable was measured as 0.109. The smaller p-value was significantly higher than the significance rate which 0.05 thus the null hypothesis failed to reject and a clear statistical relationship cannot be said between the two variables.  
+
+
+#Conclusion
+
+After the establishment of modern cities, animals have started to cut into two main groups which are feral and household animals. Thus, with the emergence of the anthropocentric view that claims that everything is worthless unless it serves humans and humans’ benefit, stray animals become less important for city dwellers and management authorities. Furthermore, stray cats, Felis catus, have become one of the biggest stray animal groups in the world after the process of distinguishing feral and household cats. The behavioristic trait manifested by a display of property ownership-a defense of certain positions or things-reaches its highest development in the human species. Man considers it his inherent right to own property either as an individual or as a member of a society or both. Further, he is ever ready to protect that property against aggressors, even when sacrificing his own life if necessary. That this behavioristic pattern is not peculiar to man, but is a fundamental characteristic of animals in general, has been shown for diverse animal groups (Burt, 1943). Thus, the concept of the home range has come into sight as all animals have their specific territory. The home range then is the area, usually around a home site, over which the animal normally travels in search of food.
+Throughout this research, the data that were collected from 6 different countries from 78 cats (Felis catus) voluntarily unlashed by their owners for the sake of the research variables of indoor hour activity, prey per month, and ages of the cats. Thus, the independent indoor hours variable analyzes individually with the dependent prey per month variable and the ages of the cats variable to understand the relationship between each group to suggest efficient and humane policies toward stray cats.
+
+There was a significant yet moderately weak correlation has been determined between the groups. With Pearson’s Correlation test, the r-value between indoor hours and prey per month is -0.371, indicating a moderately negative relationship. Furthermore, the r-value between indoor hours and ages of cats is 0.183 which indicates a significantly low correlation. Because of that result another correlation test, Spearman’s Coefficient, was done. Thus, a negative correlation between indoor hours and prey per month was observed and a positive relationship was observed between the ages of the cats and the indoor hours. As it was stated in the previous studies it was also found that the increase in the indoor hours leads to a decrease in the number of prey per month and an increase in the indoor hours leads to an increase in the age of a cat which makes the initial hypothesis for that research true. The relationship between them was assumed that as the indoor hours get an increase, the age of cats will lead to an increase yet a decrease in the amount of prey per month. The relationship between them was assumed that as the indoor hours get decrease, the age of cats will lead to a decrease but an increase in the amount of prey per month.
+
+To sum up, feral cats are one of the most abandoned species on earth. Especially after the establishment of modern cities and the separation between street animals and household animals, these facts have become more dominant and an issue for municipalities to deal with. From the results gained from the research, it can be assumed that older cats have a small home-range size when compares to younger cats due to the physical capacity of an animal. In addition to that the number of prey per month decreases when indoor hours and age increase. Thus, further research can be done on the effect of home range size on sex and also on the number of prey per month and their average location to detect the most used location by cats. Lastly, municipalities can change their trap-neuter-return policies according to the ages of the cats and prey per month frequency by age to reach maximum benefit.
+
+
+
+#Summary
+
+
+Animals began to divide into two major groups after the foundation of modern cities: feral and household animals. As a result of the growth of the anthropocentric paradigm, which holds that everything is useless unless it serves humans and their benefit, stray animals have become less relevant for city dwellers and management authorities. Furthermore, after the process of differentiating feral and home cats, stray cats, Felis catus, have become one of the world's largest stray animal groups. In the human species, the behavioristic trait represented by a display of property ownership--a protection of certain positions or things--reaches its pinnacle of development. Man believes that he has an intrinsic right to own property as an individual, as a member of a society, or both. Furthermore, he is always ready to defend that property against aggressors, even if it means risking his own life. This behavioristic pattern is not unique to humans, but rather a fundamental property of all creatures (Burt, 1943). As a result, the concept of the home range has emerged, as all animals have their own region. The home range is the area, usually surrounding a home site, that the animal normally travels over in quest of food.
+Throughout this study, data were obtained from 78 cats (Felis catus) willingly unleashed by their owners for the reason of the research variables of indoor hour activity, prey per month, and cat ages from 6 various nations. Thus, the independent indoor hours variable is analyzed separately with the dependent prey per month variable and the ages of the cats variable in order to understand the link between each group and to propose effective and compassionate policies regarding stray cats.
+A significant although fairly modest association was discovered between the groups. Pearson's Correlation test yields an r-value of -0.371 between indoor hours and prey per month, indicating a moderately unfavorable association. Furthermore, the r-value between indoor hours and cat ages is 0.183, indicating a weak association. As a result of such a result, another correlation test, Spearman's Coefficient, was performed. Thus, a negative link was discovered between indoor hours and prey per month, while a positive relationship was observed between the ages of the cats and the indoor hours. As previous studies have pointed out, increased indoor time leads to decreased prey numbers per month, and increased indoor time leads to increased cat age and decreased prey numbers per month. I also know The original hypothesis of this study is true. It was thought that increased indoor time was associated with an increase in cat age, but a decrease in the amount of prey produced per month. The relationship between the two was hypothesized to be that as the time spent indoors decreased, the age of the cats decreased, but the amount of prey produced per month increased.
+
+In summary, the wild feline is one of the most abandoned species on earth. Especially since the advent of modern cities and the segregation of street animals and livestock, these facts are becoming more and more important and a problem for municipalities to deal with. Based on research, it can be assumed that older cats have a smaller range of motion than younger cats due to the physical capabilities of the animal. Also, keeping them indoors reduces the number of prey per month and increases their age. Therefore, further research can be done on the effect of territory size on sex, the number of prey items per month and their average location, in order to identify the sites most frequented by cats. Finally, municipalities may change captive neuter return policies depending on the age of cats and prey by month and frequency by age to maximize profits. 
+
+
+
+
+\newpage
+
+# References {#references}
+
+::: {#refs}
+:::
+
+Bengsen, A. J., Algar, D., Ballard, G., Buckmaster, T., Comer, S., Fleming, P. J., ... & Zewe, F. (2016). *Feral cat home‐range size varies predictably with landscape productivity and population density.* Journal of Zoology, 298(2), 112-120.
+
+\-<https://doi.org/10.1111/jzo.12290>
+
+Burt, W. H. (1943). *Territoriality and home range concepts as applied to mammals.* Journal of mammalogy, 24(3), 346-352.
+
+\-<https://doi.org/10.2307/1374834>
+
+Doherty, T. S., Bengsen, A. J., & Davis, R. A. (2015). *A critical review of habitat use by feral cats and key directions for future research and management.* Wildlife Research, 41(5), 435-446.
+
+\-<https://doi.org/10.1071/WR14159>
+
+Hildreth, A. M., Vantassel, S. M., & Hygnstrom, S. E. (2010). *Feral cats and their management.* University of Nebraska Cooperative Extension.
+
+\-<https://extensionpublications.unl.edu/assets/pdf/ec1781.pdf>
+
+Kays, R., Dunn, R. R., Parsons, A. W., Mcdonald, B., Perkins, T., Powers, S. A., ... & Roetman, P. (2020). *The small home ranges and large local ecological impacts of pet cats.* Animal Conservation, 23(5), 516-523
+
+\-<https://doi.org/10.1111/acv.12563>
+
+Seaman, D. E., & Powell, R. A. (1996). *An evaluation of the accuracy of kernel density estimators for home range analysis.* Ecology, 77(7), 2075-2085.
+
+\-<https://doi.org/10.2307/2265701>
+
+Tandoğan, O. (2022). *Kentleşme Bağlamında Sokak Hayvanlarının Değişen Statüsü.* Kent Akademisi, 15(4), 1884-1905.
+
+\-<https://doi.org/10.35674/kent.1109822>
